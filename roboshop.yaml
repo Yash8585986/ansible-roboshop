@@ -1,0 +1,29 @@
+- name: "Create ec2 instances and r53 records"
+  hosts: all
+  connection: local
+  vars:
+    ami_id: "ami-0220d79f3f480ecf5"
+    sg_id: "sg-03ca0ca07c63fb908"
+    instance_type: "t3.micro"
+    area: "dev"
+    instances:
+      - mongodb
+      - catalogue
+
+  tasks:
+    - name: "Create ec2 instances"
+      amazon.aws.ec2_instance:
+        instance_type: "{{ instance_type }}"
+        ami_id: "{{ ami_id }}"
+        sg_id: "{{ sg_id }}"
+        name: "{{ item }} - {{ area }}"
+        tags:
+          Project: roboshop
+          Component: "{{ item }}"
+          Environment: "{{ area }}"
+      loop: "{{ instances }}"
+      register: ec2_output
+    
+    - name: "Print the output"
+      ansible.builtin.debug:
+        msg: "{{ ec2_output }}"

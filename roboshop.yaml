@@ -21,6 +21,7 @@
           Project: roboshop
           Component: "{{ item }}"
           Environment: "{{ area }}"
+          name: "{{ item }} - {{ area }}"
       loop: "{{ instances }}"
       register: ec2_output
     

@@ -11,20 +11,22 @@
       - catalogue
 
   tasks:
-    - name: "Create ec2 instances"
-      amazon.aws.ec2_instance:
-        instance_type: "{{ instance_type }}"
-        ami_id: "{{ ami_id }}"
-        sg_id: "{{ sg_id }}"
+  - name: "Create ec2 instances"
+    amazon.aws.ec2_instance:
+      instance_type: "{{ instance_type }}"
+      ami_id: "{{ ami_id }}"
+      sg_id: "{{ sg_id }}"
+      name: "{{ item }} - {{ area }}"
+      tags:
+        Project: roboshop
+        Component: "{{ item }}"
+        Environment: "{{ area }}"
         name: "{{ item }} - {{ area }}"
-        tags:
-          Project: roboshop
-          Component: "{{ item }}"
-          Environment: "{{ area }}"
-          name: "{{ item }} - {{ area }}"
-      loop: "{{ instances }}"
-      register: ec2_output
+    loop: "{{ instances }}"
+    register: ec2_output
+
+- name: "PRint the output"
+  ansible.builtin.debug:
+    msg: "{{ ec2_output }}"
     
-    - name: "Print the output"
-      ansible.builtin.debug:
-        msg: "{{ ec2_output }}"
+

@@ -3,9 +3,9 @@
   hosts: all
   connection: local
   vars:
-    sg_id: sg-076ec9ad23dab2b28
+    sg_id: sg-03ca0ca07c63fb908
     ami_id: ami-0220d79f3f480ecf5
-    domain_name: daws88s.online
+    domain_name: ramyaboutique.shop
     env: dev
     action: create
     instances:

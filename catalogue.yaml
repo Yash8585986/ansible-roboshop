@@ -22,7 +22,7 @@
         path: /app
         state: absent
 
-    - name : "create home directory"
+    - name: "create home directory"
       ansible.builtin.file:
         path: /app
         state: directory

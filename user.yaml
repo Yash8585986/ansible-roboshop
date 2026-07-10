@@ -46,7 +46,17 @@
 
     - name: "Install npm dependencies"
       community.general.npm:
-        path: /app/location
+        path: /app
+ 
+    - name: Copy file with owner and permissions
+      ansible.builtin.copy:
+        src: user.service 
+        dest: /etc/systemd/system/user.service
 
-    
+    - name: start catalogue
+      ansible.builtin.service:
+        name: catalogue
+        state: restarted
+        enabled: yes
+        
         

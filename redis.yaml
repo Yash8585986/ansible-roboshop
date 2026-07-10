@@ -16,6 +16,17 @@
         regexp: '127.0.0.1'
         replace: '0.0.0.0'  
 
+    - name: Replace a localhost entry with our own
+      ansible.builtin.lineinfile:
+        path: /etc/redis/redis.conf
+        regexp: 'protected-mode'
+        line: 'protected-mode no'
+
+    - name: "service start"
+      ansible.builtin.service:
+        name: redis
+        enabled: yes
+        state: restarted
     
 
       

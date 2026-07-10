@@ -2,13 +2,14 @@
   hosts: catalogue
   become: yes 
   tasks:  
-    - name : "enable nodejs 20"
+    - name: "enable nodejs 20"
       ansible.builtin.command: dnf module enable nodejs:20 -y
 
-    - name : "install node js"
+    - name: "install node js"
       ansible.builtin.dnf:
         name: nodejs:20
         state: present 
+
     - name: "create systsem user roboshop"
       ansible.builtin.user:
         name: roboshop

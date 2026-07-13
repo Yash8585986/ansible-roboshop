@@ -53,9 +53,9 @@
         src: user.service 
         dest: /etc/systemd/system/user.service
 
-    - name: start catalogue
+    - name: start user
       ansible.builtin.service:
-        name: catalogue
+        name: user
         state: restarted
         enabled: yes
         

@@ -10,7 +10,7 @@
     - name: start mysqld service 
       ansible.builtin.service:
         name: mysqld
-        start: restarted
+        state: restarted
         enabled: yes 
         
 

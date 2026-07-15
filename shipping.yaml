@@ -34,14 +34,14 @@
         path: /tmp/shipping-v3.zip
         state: absent
 
-    - name: download catalogue
+    - name: download shipping
       ansible.builtin.get_url:
         url: https://roboshop-artifacts.s3.amazonaws.com/shipping-v3.zip
-        dest: /tmp/catalogue.zip
+        dest: /tmp/shipping.zip
 
     - name: unarchieve shipping
       ansible.builtin.unarchive:
-        src: /tmp/shipping-v3.zip
+        src: /tmp/shipping.zip
         dest: /app
         remote_src: yes
 
@@ -49,6 +49,7 @@
       ansible.builtin.command: mvn clean package 
       args:
         chdir: /app
+    
     - name: install dependencies
       ansible.builtin.command: mv target/shipping-1.0.jar shipping.jar
       args:
@@ -64,7 +65,7 @@
         daemon_reload: true
    
     - name: "load shipping data"
-      ansible.mysql.mysql_db:
+      community.mysql.mysql_db:
         state: import
         name: all
         login_host: "{{ MYSQL_HOST }}"

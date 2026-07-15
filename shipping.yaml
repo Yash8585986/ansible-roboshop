@@ -2,7 +2,7 @@
   hosts: shipping
   become: yes 
   vars:
-    MYSQL_HOST: mysql-dev.ramyaboutique.shop
+    MYSQL_HOST: "mysql-dev.ramyaboutique.shop"
   tasks:
     - name: install maven 
       ansible.builtin.dnf:

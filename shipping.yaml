@@ -1,6 +1,8 @@
 - name: configure shipping service
   hosts: shipping
   become: yes 
+  vars:
+    MYSQL_HOST: mysql-dev.ramyaboutique.shop
   tasks:
     - name: install maven 
       ansible.builtin.dnf:
@@ -65,7 +67,7 @@
       ansible.mysql.mysql_db:
         state: import
         name: all
-        login_host: mysql-dev.ramyaboutique.shop
+        login_host: "{{ MYSQL_HOST }}"
         login_user: root 
         login_password: RoboShop@1
         target: "{{ item }}"

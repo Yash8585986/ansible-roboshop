@@ -1,5 +1,6 @@
+# ansible-playbook -i localhost,   -e '{"instances":["mongodb","catalogue","redis","user","cart","mysql","shipping","rabbitmq","payment","frontend"]}'  -e action=destroy roboshop.yaml
 - name: create ec2 and r53 records
-  hosts: localhost
+  hosts: all
   connection: local
   vars:
     sg_id: sg-03ca0ca07c63fb908
@@ -10,7 +11,6 @@
     instances:
     - mongodb
     - catalogue
-    
   tasks:
   ### CREATE ###
   - name: create ec2 instance

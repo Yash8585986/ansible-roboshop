@@ -66,7 +66,7 @@
 
     - name: Install specified python requirements
       ansible.builtin.pip:
-        requirements: "{{ item }}"
+        name: "{{ item }}"
         executable: pip3.9
       loop:
       - cryptography
